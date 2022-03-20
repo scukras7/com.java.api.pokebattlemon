@@ -5,13 +5,15 @@ import java.sql.Date;
 public class WinnerReq {
 
     private String battleId;
-    private String player;
+    private String winningPlayer;
     private String winningPokemon;
     private Date dateCreated;
 
-    public WinnerReq(String battleId, String player, String winningPokemon, Date dateCreated) {
+    public WinnerReq() {}
+
+    public WinnerReq(String battleId, String winningPlayer, String winningPokemon, Date dateCreated) {
         this.battleId = battleId;
-        this.player = player;
+        this.winningPlayer = winningPlayer;
         this.winningPokemon = winningPokemon;
         this.dateCreated = dateCreated;
     }
@@ -24,12 +26,12 @@ public class WinnerReq {
         this.battleId = battleId;
     }
 
-    public String getPlayer() {
-        return player;
+    public String getWinningPlayer() {
+        return winningPlayer;
     }
 
-    public void setPlayer(String player) {
-        this.player = player;
+    public void setWinningPlayer(String winningPlayer) {
+        this.winningPlayer = winningPlayer;
     }
 
     public String getWinningPokemon() {
@@ -52,7 +54,7 @@ public class WinnerReq {
     public String toString() {
         return "WinnersReq{" +
                 "battleId='" + battleId + '\'' +
-                ", player='" + player + '\'' +
+                ", winningPlayer='" + winningPlayer + '\'' +
                 ", winningPokemon='" + winningPokemon + '\'' +
                 ", dateCreated=" + dateCreated +
                 '}';

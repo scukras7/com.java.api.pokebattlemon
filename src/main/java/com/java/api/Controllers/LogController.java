@@ -2,14 +2,12 @@ package com.java.api.Controllers;
 
 import com.java.api.DTOs.*;
 import com.java.api.Entities.BattleId;
-import com.java.api.Respositories.BattleIdsRepository;
-import com.java.api.Respositories.BenchesRepository;
+import com.java.api.Respositories.*;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.*;
 import jakarta.inject.Inject;
 
-import javax.print.attribute.standard.Media;
 import java.util.Date;
 
 @Controller("/api/v1/log")
@@ -20,6 +18,15 @@ public class LogController {
 
     @Inject
     private BenchesRepository benchesRepository;
+
+    @Inject
+    private MovesRepository movesRepository;
+
+    @Inject
+    private FaintsRepository faintsRepository;
+
+    @Inject
+    private WinnersRepository winnersRepository;
 
     @Get("/create/battleid")
     @Produces(MediaType.APPLICATION_JSON)
@@ -39,20 +46,22 @@ public class LogController {
     @Post("/save/move")
     @Consumes(MediaType.APPLICATION_JSON)
     public HttpResponse<?> saveLog (@Body MoveReq moveReq) {
-        System.out.println("MOVE");
-        System.out.println(moveReq);
+        movesRepository.saveMove(moveReq);
         return HttpResponse.ok(new GeneralRes());
     }
 
-    /*
-
     @Post("/save/faints")
     @Consumes(MediaType.APPLICATION_JSON)
-    public HttpResponse<?> saveLog (@Body FaintsReq faintsReq) {}
+    public HttpResponse<?> saveLog (@Body FaintsReq faintsReq) {
+        faintsRepository.saveFaint(faintsReq);
+        return HttpResponse.ok(new GeneralRes());
+    }
 
     @Post("/save/winner")
     @Consumes(MediaType.APPLICATION_JSON)
-    public HttpResponse<?> saveWinner (@Body WinnerReq winnerReq) {}
+    public HttpResponse<?> saveWinner (@Body WinnerReq winnerReq) {
+        winnersRepository.saveWinner(winnerReq);
+        return HttpResponse.ok(new GeneralRes());
+    }
 
-    */
 }

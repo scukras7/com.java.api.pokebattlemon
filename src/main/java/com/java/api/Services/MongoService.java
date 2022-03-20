@@ -22,24 +22,38 @@ public class MongoService {
     @Value("${mongodb.database.name}")
     private String databaseName;
 
+    private MongoClient client;
+
+    public void createMongoClient () {
+
+        if (client == null) {
+
+            CodecRegistry pojoCodecRegistry = CodecRegistries.fromRegistries(
+                    MongoClientSettings.getDefaultCodecRegistry(),
+                    CodecRegistries.fromProviders(
+                            PojoCodecProvider.builder()
+                                    .automatic(true)
+                                    .build()
+                    )
+            );
+
+            MongoClientSettings settings = MongoClientSettings.builder()
+                    .codecRegistry(pojoCodecRegistry)
+                    .applyConnectionString(new ConnectionString(mongoUri))
+                    .build();
+
+            client = MongoClients.create(settings);
+
+        }
+
+    }
+
+    public void closeClientConnection () {
+        client.close();
+    }
+
     public MongoCollection<Document> getCollection (String collection) {
-
-        CodecRegistry pojoCodecRegistry = CodecRegistries.fromRegistries(
-                MongoClientSettings.getDefaultCodecRegistry(),
-                CodecRegistries.fromProviders(
-                        PojoCodecProvider.builder()
-                                .automatic(true)
-                                .build()
-                )
-        );
-
-        MongoClientSettings settings = MongoClientSettings.builder()
-                .codecRegistry(pojoCodecRegistry)
-                .applyConnectionString(new ConnectionString(mongoUri))
-                .build();
-
-        MongoClient mongoClient = MongoClients.create(settings);
-        MongoDatabase database = mongoClient.getDatabase(databaseName);
+        MongoDatabase database = client.getDatabase(databaseName);
         return database.getCollection(collection);
     }
 }

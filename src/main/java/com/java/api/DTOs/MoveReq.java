@@ -5,6 +5,7 @@ import java.util.Date;
 public class MoveReq {
 
     private String battleId;
+    private Integer turnCount;
     private String attackingPokemon;
     private String defendingPokemon;
     private String name;
@@ -13,8 +14,9 @@ public class MoveReq {
 
     public MoveReq() {}
 
-    public MoveReq(String battleId, String attackingPokemon, String defendingPokemon, String name, Integer damageAmountDealt, Date dateCreate) {
+    public MoveReq(String battleId, Integer turnCount, String attackingPokemon, String defendingPokemon, String name, Integer damageAmountDealt, Date dateCreate) {
         this.battleId = battleId;
+        this.turnCount = turnCount;
         this.attackingPokemon = attackingPokemon;
         this.defendingPokemon = defendingPokemon;
         this.name = name;
@@ -29,6 +31,10 @@ public class MoveReq {
     public void setBattleId(String battleId) {
         this.battleId = battleId;
     }
+
+    public Integer getTurnCount() { return turnCount; }
+
+    public void setTurnCount(Integer turnCount) {  this.turnCount = turnCount; }
 
     public String getAttackingPokemon() { return attackingPokemon; }
 
@@ -66,6 +72,7 @@ public class MoveReq {
     public String toString() {
         return "MovesReq{" +
                 "battleId='" + battleId + '\'' +
+                ", turnCount=" + turnCount +
                 ", attackingPokemon='" + attackingPokemon + '\'' +
                 ", defendingPokemon='" + defendingPokemon + '\'' +
                 ", name='" + name + '\'' +
