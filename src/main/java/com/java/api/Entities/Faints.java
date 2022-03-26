@@ -1,18 +1,21 @@
-package com.java.api.DTOs;
+package com.java.api.Entities;
 
 import java.util.Date;
 
-public class FaintsReq {
+public class Faints {
+
+    private static final String EVENT = "faint";
 
     private String battleId;
+    private final String event = EVENT;
     private Integer turnCount;
     private String pokemon;
     private String pokemonOwner;
     private Date dateCreated;
 
-    public FaintsReq() {}
+    public Faints() {}
 
-    public FaintsReq(String battleId, Integer turnCount, String pokemon, String pokemonOwner, Date dateCreated) {
+    public Faints(String battleId, Integer turnCount, String pokemon, String pokemonOwner, Date dateCreated) {
         this.battleId = battleId;
         this.turnCount = turnCount;
         this.pokemon = pokemon;
@@ -27,6 +30,8 @@ public class FaintsReq {
     public void setBattleId(String battleId) {
         this.battleId = battleId;
     }
+
+    public String getEvent() { return event; }
 
     public Integer getTurnCount() { return turnCount; }
 
@@ -60,6 +65,7 @@ public class FaintsReq {
     public String toString() {
         return "FaintsReq{" +
                 "battleId='" + battleId + '\'' +
+                ", event='" + event + '\'' +
                 ", turnCount=" + turnCount +
                 ", pokemon='" + pokemon + '\'' +
                 ", pokemonOwner='" + pokemonOwner + '\'' +

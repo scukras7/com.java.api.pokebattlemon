@@ -1,18 +1,20 @@
-package com.java.api.DTOs;
+package com.java.api.Entities;
+
+import com.java.api.POJOs.Pokemon;
 
 import java.util.Date;
 import java.util.List;
 
-public class BenchesReq {
+public class Benches {
 
     private String battleId;
     private List<Pokemon> playerBench;
     private List<Pokemon> opponentBench;
     private Date dateCreated;
 
-    public BenchesReq () {}
+    public Benches() {}
 
-    public BenchesReq(String battleId, List<Pokemon> playerBench, List<Pokemon> opponentBench, Date dateCreated) {
+    public Benches(String battleId, List<Pokemon> playerBench, List<Pokemon> opponentBench, Date dateCreated) {
         this.battleId = battleId;
         this.playerBench = playerBench;
         this.opponentBench = opponentBench;

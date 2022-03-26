@@ -1,4 +1,4 @@
-package com.java.api.DTOs;
+package com.java.api.POJOs;
 
 public class Stat {
 

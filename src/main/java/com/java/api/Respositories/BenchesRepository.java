@@ -1,6 +1,6 @@
 package com.java.api.Respositories;
 
-import com.java.api.DTOs.BenchesReq;
+import com.java.api.Entities.Benches;
 import com.java.api.Services.MongoService;
 import com.java.api.Subscribers.GeneralSubscriber;
 import io.micronaut.context.annotation.Value;
@@ -19,12 +19,12 @@ public class BenchesRepository {
 
     public BenchesRepository () {}
 
-    public void saveBenches (BenchesReq benchesReq) {
+    public void saveBenches (Benches benches) {
 
-        Document doc = new Document("battleId", benchesReq.getBattleId())
-                .append("playerBench", benchesReq.getPlayerBench())
-                .append("opponentBench", benchesReq.getOpponentBench())
-                .append("dateCreated", benchesReq.getDateCreated());
+        Document doc = new Document("battleId", benches.getBattleId())
+                .append("playerBench", benches.getPlayerBench())
+                .append("opponentBench", benches.getOpponentBench())
+                .append("dateCreated", benches.getDateCreated());
 
         mongoService.getCollection(collectionBenches).insertOne(doc).subscribe(new GeneralSubscriber<>());
 

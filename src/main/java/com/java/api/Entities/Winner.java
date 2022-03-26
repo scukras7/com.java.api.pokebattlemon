@@ -1,18 +1,23 @@
-package com.java.api.DTOs;
+package com.java.api.Entities;
 
-import java.sql.Date;
+import java.util.Date;
 
-public class WinnerReq {
+public class Winner {
+
+    private static final String EVENT = "winner";
 
     private String battleId;
+    private final String event = EVENT;
+    private Integer turnCount;
     private String winningPlayer;
     private String winningPokemon;
     private Date dateCreated;
 
-    public WinnerReq() {}
+    public Winner() {}
 
-    public WinnerReq(String battleId, String winningPlayer, String winningPokemon, Date dateCreated) {
+    public Winner(String battleId, Integer turnCount, String winningPlayer, String winningPokemon, Date dateCreated) {
         this.battleId = battleId;
+        this.turnCount = turnCount;
         this.winningPlayer = winningPlayer;
         this.winningPokemon = winningPokemon;
         this.dateCreated = dateCreated;
@@ -24,6 +29,16 @@ public class WinnerReq {
 
     public void setBattleId(String battleId) {
         this.battleId = battleId;
+    }
+
+    public String getEvent() { return event; }
+
+    public Integer getTurnCount() {
+        return turnCount;
+    }
+
+    public void setTurnCount(Integer turnCount) {
+        this.turnCount = turnCount;
     }
 
     public String getWinningPlayer() {
@@ -52,8 +67,10 @@ public class WinnerReq {
 
     @Override
     public String toString() {
-        return "WinnersReq{" +
+        return "WinnerReq{" +
                 "battleId='" + battleId + '\'' +
+                ", event='" + event + '\n' +
+                ", turnCount=" + turnCount +
                 ", winningPlayer='" + winningPlayer + '\'' +
                 ", winningPokemon='" + winningPokemon + '\'' +
                 ", dateCreated=" + dateCreated +

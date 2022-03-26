@@ -1,10 +1,13 @@
-package com.java.api.DTOs;
+package com.java.api.Entities;
 
 import java.util.Date;
 
-public class MoveReq {
+public class Moves {
+
+    private static final String EVENT = "move";
 
     private String battleId;
+    private final String event = EVENT;
     private Integer turnCount;
     private String attackingPokemon;
     private String defendingPokemon;
@@ -12,9 +15,9 @@ public class MoveReq {
     private Integer damageAmountDealt;
     private Date dateCreated;
 
-    public MoveReq() {}
+    public Moves() {}
 
-    public MoveReq(String battleId, Integer turnCount, String attackingPokemon, String defendingPokemon, String name, Integer damageAmountDealt, Date dateCreate) {
+    public Moves(String battleId, Integer turnCount, String attackingPokemon, String defendingPokemon, String name, Integer damageAmountDealt, Date dateCreate) {
         this.battleId = battleId;
         this.turnCount = turnCount;
         this.attackingPokemon = attackingPokemon;
@@ -31,6 +34,8 @@ public class MoveReq {
     public void setBattleId(String battleId) {
         this.battleId = battleId;
     }
+
+    public String getEvent() { return event; }
 
     public Integer getTurnCount() { return turnCount; }
 
@@ -72,6 +77,7 @@ public class MoveReq {
     public String toString() {
         return "MovesReq{" +
                 "battleId='" + battleId + '\'' +
+                ", event='" + event + '\'' +
                 ", turnCount=" + turnCount +
                 ", attackingPokemon='" + attackingPokemon + '\'' +
                 ", defendingPokemon='" + defendingPokemon + '\'' +
