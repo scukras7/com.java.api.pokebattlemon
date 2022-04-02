@@ -1,7 +1,7 @@
 Thumbs.db
 .DS_Store
 .gradle
-build/
+build/*
 target/
 out/
 .idea
@@ -17,4 +17,4 @@ out/
 src/main/resources/
 
 # exceptions
-!build/libs/pokebattlemon-*-all.jar
+!build/libs/*
