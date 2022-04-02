@@ -9,5 +9,4 @@ COPY build/libs/${POKEBATTLEMON_JAR} ${SERVER_DIR}
 
 WORKDIR ${SERVER_DIR}
 
-ENTRYPOINT [ "sh" ]
-#ENTRYPOINT [ "java", "-Dmicronaut.environtments=prod", "-jar", ${POKEBATTLEMON_JAR} ]
+ENTRYPOINT [ "java", "-Dmicronaut.environtments=prod", "-jar", ${POKEBATTLEMON_JAR} ]
