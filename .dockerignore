@@ -1,0 +1,11 @@
+build/classes/
+build/distributions/
+build/docker/
+build/generated/
+build/resources/
+build/scripts/
+build/scriptsShadow/
+build/tmp/
+gradle/
+.idea
+.gradle

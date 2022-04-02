@@ -8,6 +8,8 @@ import io.reactivex.rxjava3.core.Flowable;
 import jakarta.inject.Inject;
 import org.bson.Document;
 
+import java.util.concurrent.TimeUnit;
+
 import static com.mongodb.client.model.Filters.eq;
 
 public class WinnersRepository {
@@ -34,16 +36,41 @@ public class WinnersRepository {
     }
 
     public Winner getWinnerByBattleId (String battleId) {
-        Document doc = Flowable.fromPublisher(mongoService.getCollection(collectionWinners).find(eq("battleId", battleId)))
-                .firstElement().blockingGet();
+        // check for winner doc to be created for the given battle id when rendering front-end
+        // sometimes the front-end can render before winner document has been written to the database
+        final Integer MAX_NUMBER_OF_ATTEMPT_TO_RETRIEVE_DOCUMENT = 20;
+        final Long DELAY_MS = 1000L;
 
-        return new Winner(
-                doc.getString("battleId"),
-                doc.getInteger("turnCount"),
-                doc.getString("winningPlayer"),
-                doc.getString("winningPokemon"),
-                doc.getDate("dateCreated")
-        );
+        int attempts = 0;
+        Document doc = new Document();
+
+        while (attempts < MAX_NUMBER_OF_ATTEMPT_TO_RETRIEVE_DOCUMENT) {
+            doc = Flowable.fromPublisher(mongoService.getCollection(collectionWinners).find(eq("battleId", battleId)))
+                    .firstElement().blockingGet();
+
+            if (doc != null && !doc.isEmpty()) {
+                break;
+            }
+
+            attempts++;
+            try {
+                TimeUnit.MILLISECONDS.sleep(DELAY_MS);
+            } catch (InterruptedException e) {
+                System.err.println(e.getMessage());
+            }
+        }
+
+        if (doc != null && !doc.isEmpty()) {
+            return new Winner(
+                    doc.getString("battleId"),
+                    doc.getInteger("turnCount"),
+                    doc.getString("winningPlayer"),
+                    doc.getString("winningPokemon"),
+                    doc.getDate("dateCreated")
+            );
+        } else {
+            return new Winner();
+        }
     }
 
 }

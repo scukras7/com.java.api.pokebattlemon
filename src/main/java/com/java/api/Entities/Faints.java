@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Faints {
 
-    private static final String EVENT = "faint";
+    private static final String EVENT = "faints";
 
     private String battleId;
     private final String event = EVENT;

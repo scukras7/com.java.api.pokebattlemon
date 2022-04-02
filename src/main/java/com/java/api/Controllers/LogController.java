@@ -12,7 +12,7 @@ import jakarta.inject.Inject;
 import java.util.Date;
 import java.util.List;
 
-@Controller("/api/v1/log")
+@Controller("/pokebattlemon/api/v1/log")
 public class LogController {
 
     @Inject
